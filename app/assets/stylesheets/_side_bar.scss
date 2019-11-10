@@ -1,0 +1,53 @@
+.side-header {
+  height: 100px;
+  width: 300px;
+  padding: 0 20px;
+  background-color: #253141;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  .side-header__left {
+    .user__name {
+      font-size: 16px;
+      font-weight: bold;
+      color: $textWhiteColor;
+      text-align: center;
+      line-height: 100px;
+    }
+  }
+  .side-header__right {
+    &__option {
+      display: flex;
+      text-align: center;
+      line-height: 100px;
+    }
+    &__btn {
+      margin-left: 5px;
+      &--icon {
+        color: $textWhiteColor;
+        }
+    }
+  }
+}
+
+.content {
+  height: calc(100vh - 100px);
+  width: 300px;
+  padding: 20px 20px 0;
+  background-color: #2f3e51;
+  font-weight: bold;
+  box-sizing: border-box;
+  &__group {
+    padding: 0 0 40px;
+    &__name {
+      color: $textWhiteColor;
+      font-size: 15px;
+      padding: 0 0 5px;
+    }
+    &__message {
+      color: $textWhiteColor;
+      font-size: 11px;
+    }
+  }
+  
+}
