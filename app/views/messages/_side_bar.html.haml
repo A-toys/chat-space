@@ -1,0 +1,20 @@
+.side-header
+  .side-header__left
+    .user__name user_name
+
+  .side-header__right
+    %ul.side-header__right__option
+      %li.side-header__right__btn
+        = link_to "#", class: "side-header__right__btn--icon" do
+          = icon 'fas', 'edit'
+      %li.side-header__right__btn
+        = link_to "#", class: "side-header__right__btn--icon" do
+          = icon 'fas', 'cog'
+
+.content
+  .content__group
+    = link_to "#", class: "content__group__link" do
+      %p.content__group__name
+        group_name
+      %p.content__group__message
+        最初の投稿
