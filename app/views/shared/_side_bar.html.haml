@@ -6,16 +6,17 @@
   .side-header__right
     %ul.side-header__right__option
       %li.side-header__right__btn
-        = link_to "#", class: "side-header__right__btn--icon" do
+        = link_to new_group_path, class: "side-header__right__btn--icon" do
           = icon 'fas', 'edit'
       %li.side-header__right__btn
         = link_to edit_user_path(current_user), class: "side-header__right__btn--icon" do
           = icon 'fas', 'cog'
 
 .content
-  .content__group
-    = link_to "#", class: "content__group__link" do
-      %p.content__group__name
-        group_name
-      %p.content__group__message
-        最初の投稿
+  - current_user.groups.each do |group|
+    .content__group
+      = link_to "#", class: "content__group__link" do  #group_messages_path(group)
+        %p.content__group__name
+          = group.name
+        %p.content__group__message
+          最初の投稿
