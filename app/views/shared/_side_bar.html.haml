@@ -15,7 +15,7 @@
 .content
   - current_user.groups.each do |group|
     .content__group
-      = link_to "#", class: "content__group__link" do  #group_messages_path(group)
+      = link_to "group_messages_path(group)", class: "content__group__link" do
         %p.content__group__name
           = group.name
         %p.content__group__message
