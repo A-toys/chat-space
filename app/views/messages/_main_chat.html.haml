@@ -1,0 +1,26 @@
+.main-header
+  .main-header__left
+    .group__name
+      = @group.name
+
+    .group__member
+      %p Member：
+      %p.group__member__name
+        - @group.users.each do |user|
+          = user.name
+
+  .main-header__right
+    .group__edit
+      = link_to "Edit", edit_group_path(@group), class: "group__edit__btn"
+
+.main-content
+  = render @messages
+
+.form
+  = form_for [@group, @message] do |f|
+    = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+    .form__mask
+      = f.label :image, class: 'form__mask__image' do
+        = icon('fas', 'image', class: 'icon')
+        = f.file_field :image, class: 'hidden'
+    = f.submit 'Send', class: 'form__submit'
