@@ -41,7 +41,7 @@
   padding: 46px 40px;
   background-color: #fafafa;
   box-sizing: border-box;
-  position: relative;
+  overflow: auto;
   .message {
     padding: 0 0 40px;
     &__info {
