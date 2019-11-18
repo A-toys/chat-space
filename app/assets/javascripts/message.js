@@ -1,8 +1,10 @@
 $(function() {
 
   function buildMessage(message) {
-    var html = message.image !== null ? (
-               `<div class="message">
+    var image_view = message.image !== null ? 
+                     `<img src="${message.image}", class="lower-message__image" >` : "";
+
+    var html = `<div class="message">
                   <div class="message__info">
                     <div class="message__info__writer">
                     ${message.user}
@@ -15,26 +17,9 @@ $(function() {
                     <p class="message__text">
                       ${message.content}
                     </p>
-                    <img src="${message.image}", class="lower-message__image" > 
-                  </div>
-                </div>` 
-    ) : (
-               `<div class="message">
-                  <div class="message__info">
-                    <div class="message__info__writer">
-                      ${message.user}
-                    </div>
-                    <div class="message__info__post-day">
-                      ${message.created_at}
-                    </div>
-                  </div>
-                  <div class="lower-message">
-                    <p class="message__text">
-                      ${message.content}
-                    </p>
+                    ${image_view}
                   </div>
                 </div>`
-    );
     return html;
   }
 
