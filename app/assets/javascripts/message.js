@@ -1,25 +1,32 @@
 $(function() {
 
-  function buildMessage(message) {
-    var image_view = message.image !== null ? 
-                     `<img src="${message.image}", class="lower-message__image" >` : "";
-
-    var html = `<div class="message">
-                  <div class="message__info">
-                    <div class="message__info__writer">
-                    ${message.user}
-                    </div>
-                    <div class="message__info__post-day">
-                      ${message.created_at}
-                    </div>
+  function buildMessageHTML(message) {
+    var lower_message = ''
+    if (message.content && message.image.url) {
+      lower_message = `<p class="message__text">
+                         ${message.content} 
+                       </p>
+                       <img src="${message.image.url}" class="lower-message__image" >`
+    } else if (message.content) {
+      lower_message = `<p class="message__text">
+                         ${message.content}
+                       </p>`
+    } else if (message.image.url) {
+      lower_message = `<img src="${message.image.url}" class="lower-message__image" >`
+    };
+    var html = `<div class="message" data-id=${message.id}>
+                <div class="message__info">
+                  <div class="message__info__writer">
+                    ${message.user_name}
                   </div>
-                  <div class="lower-message">
-                    <p class="message__text">
-                      ${message.content}
-                    </p>
-                    ${image_view}
+                  <div class="message__info__post-day">
+                  ${message.created_at}
                   </div>
-                </div>`
+                </div>
+                <div class="lower-message">
+                  ${lower_message}
+                </div>
+              </div>`
     return html;
   }
 
@@ -36,7 +43,7 @@ $(function() {
       contentType: false
     })
     .done(function(message){
-      var html = buildMessage(message);
+      var html = buildMessageHTML(message);
       $('.main-content').append(html);
       $('.main-content').animate({scrollTop : $('.main-content')[0].scrollHeight});
       $('.new_message')[0].reset();
@@ -46,4 +53,29 @@ $(function() {
       alert("メッセージ送信に失敗しました");
     })
   })
+
+  var reloadMessages = function() {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){
+      var last_message_id = $('.message').last().data('id');
+      $.ajax({
+        url: 'api/messages',
+        type: 'GET',
+        data: {id: last_message_id},
+        dataType: 'json'
+      })
+      .done(function(messages) {
+        var insertHTML = '';
+
+        messages.forEach(function(message) {
+          insertHTML = buildMessageHTML(message);
+          $('.main-content').append(insertHTML);
+        })
+        $('.main-content').animate({scrollTop : $('.main-content')[0].scrollHeight});
+      })
+      .fail(function() {
+        alert('error');
+      })
+    }
+  }
+  setInterval(reloadMessages, 7000);
 })
