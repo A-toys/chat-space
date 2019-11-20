@@ -55,7 +55,7 @@ $(function() {
   })
 
   var reloadMessages = function() {
-    if (window.location.href.match(/\/groups\/\d+\/messages/)){
+    if (window.location.href.match(/\/groups\/\d+\/messages/) && $('.message').length !== 0){
       var last_message_id = $('.message').last().data('id');
       $.ajax({
         url: 'api/messages',
